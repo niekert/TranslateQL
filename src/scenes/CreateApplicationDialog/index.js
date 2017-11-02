@@ -16,6 +16,9 @@ const CREATE_APPLICATION_MUTATION = gql`
     ) {
       id
       name
+      user {
+        id
+      }
     }
   }
 `;
