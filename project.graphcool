@@ -1,0 +1,58 @@
+# project: cj7je9lu000kw0195jyji5cps
+# version: 10
+
+type File implements Node {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String!
+  secret: String! @isUnique
+  size: Int!
+  updatedAt: DateTime!
+  url: String! @isUnique
+}
+
+type User implements Node {
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  id: ID! @isUnique
+  username: String! @isUnique
+  posts: [Post!]! @relation(name: "UserPosts")
+  votes: [Vote!]! @relation(name: "UserVotes")
+  email: String @isUnique
+  password: String
+}
+
+type Vote implements Node {
+  id: ID! @isUnique
+  score: Int!
+  post: Post @relation(name: "PostVotes")
+  postedBy: User @relation(name: "UserVotes")
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Post implements Node {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  user: User! @relation(name: "UserPosts")
+  title: String!
+  description: String
+  photos: [Photo!]! @relation(name: "PostPhotos")
+  votes: [Vote!]! @relation(name: "PostVotes")
+  updatedAt: DateTime!
+}
+
+type Photo implements Node {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  url: String!
+  post: Post @relation(name: "PostPhotos")
+  updatedAt: DateTime!
+}
+
+type Category implements Node {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

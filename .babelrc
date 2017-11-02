@@ -1,0 +1,20 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": ["last 2 versions"]
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-react-jsx",
+    "transform-object-rest-spread",
+    "syntax-optional-chaining",
+    "babel-plugin-transform-class-properties",
+    "babel-plugin-styled-components"
+  ]
+}
