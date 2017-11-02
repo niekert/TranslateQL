@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { func, string } from 'prop-types';
 import { DialogHeader } from 'style/Headings';
 import styled from 'styled-components';
+import history from 'util/history';
 import { prop } from 'styled-tools';
 import { Form, Input, Label, Submit, ErrorLabel } from 'style/Forms';
 import Dialog from 'components/Dialog';
@@ -19,6 +20,7 @@ class CreateApplicationDialog extends Component {
 
   state = {
     name: '',
+    error: '',
     selectedBaseLanguageId: '',
   };
 
@@ -32,9 +34,26 @@ class CreateApplicationDialog extends Component {
     });
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
-    console.log('submitting form');
+    const { name, selectedBaseLanguageId } = this.state;
+
+    this.setState({ error: null });
+
+    try {
+      await this.props.createApplicationMutation({
+        variables: {
+          name,
+          baseLanguageId: selectedBaseLanguageId,
+          userId: this.props.userId,
+        },
+      });
+
+      history.replace('/');
+    } catch (error) {
+      console.log('something went wrong', error);
+      this.setState({ error });
+    }
   };
 
   render() {

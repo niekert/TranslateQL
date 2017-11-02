@@ -6,8 +6,8 @@ import CreateApplicationDialog from './components/CreateApplicationDialog';
 const CREATE_APPLICATION_MUTATION = gql`
   mutation createApplicationMutation(
     $name: String!
-    $userId: String!
-    $baseLanguageId: String!
+    $userId: ID!
+    $baseLanguageId: ID!
   ) {
     createApplication(
       name: $name
