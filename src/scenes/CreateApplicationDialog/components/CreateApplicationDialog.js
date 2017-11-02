@@ -14,8 +14,7 @@ const StyledSubmit = styled(Submit)`
 
 class CreateApplicationDialog extends Component {
   static propTypes = {
-    createApplicationMutation: func.isRequired,
-    userId: string.isRequired,
+    submit: func.isRequired,
   };
 
   state = {
@@ -41,12 +40,9 @@ class CreateApplicationDialog extends Component {
     this.setState({ error: null });
 
     try {
-      await this.props.createApplicationMutation({
-        variables: {
-          name,
-          baseLanguageId: selectedBaseLanguageId,
-          userId: this.props.userId,
-        },
+      await this.props.submit({
+        name,
+        baseLanguageId: selectedBaseLanguageId,
       });
 
       history.replace('/');
