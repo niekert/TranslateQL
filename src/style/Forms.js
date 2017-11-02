@@ -59,6 +59,10 @@ export const Radio = styled.input.attrs({
   type: 'radio',
 })``;
 
+export const Checkbox = styled.input.attrs({
+  type: 'checkbox',
+});
+
 export const RadioLabel = styled.label`
   display: block;
   margin: ${prop('theme.spacing.0')} 0;

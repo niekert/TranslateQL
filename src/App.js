@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import FadeTransition from 'components/transitions/Fade';
 import ApplicationsPage from 'scenes/ApplicationsPage';
+import ApplicationDetails from 'scenes/ApplicationDetails';
 import AuthRoute from 'scenes/AuthenticatedRoute';
 import LoginPage from 'scenes/LoginPage';
 import Logout from 'scenes/Logout';
@@ -17,6 +18,10 @@ function App() {
         <FadeTransition>
           <Switch>
             <Route path="/login" component={LoginPage} />
+            <Route
+              path="/application/:applicationId"
+              component={ApplicationDetails}
+            />
             <Route path="/logout" component={Logout} />
             <AuthRoute path="*" component={ApplicationsPage} />
           </Switch>

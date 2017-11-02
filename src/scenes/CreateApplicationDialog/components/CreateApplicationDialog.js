@@ -6,7 +6,7 @@ import history from 'util/history';
 import { prop } from 'styled-tools';
 import { Form, Input, Label, Submit, ErrorLabel } from 'style/Forms';
 import Dialog from 'components/Dialog';
-import LanguagePicker from '../scenes/LanguagePicker';
+import LanguagePicker from 'scenes/LanguagePicker';
 
 const StyledSubmit = styled(Submit)`
   margin-top: ${prop('theme.spacing.1')};
@@ -68,7 +68,7 @@ class CreateApplicationDialog extends Component {
           />
           <Label>Base language</Label>
           <LanguagePicker
-            selectedLanguageId={selectedBaseLanguageId}
+            selected={selectedBaseLanguageId}
             onChange={this.onLanguageChange}
           />
 

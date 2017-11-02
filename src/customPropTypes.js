@@ -6,3 +6,8 @@ export const postProp = shape({
   title: string.isRequired,
   description: string.isRequired,
 });
+
+export const matchProp = shape({
+  url: string.isRequired,
+  path: string.isRequired,
+});
