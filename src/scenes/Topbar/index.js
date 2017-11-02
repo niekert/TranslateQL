@@ -1,7 +1,8 @@
 import { get } from 'lodash';
 import { connect } from 'react-redux';
 import { mapProps, branch } from 'recompose';
-import { graphql, gql, compose } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
 import Topbar from './components';
 
 const USER_QUERY = gql`

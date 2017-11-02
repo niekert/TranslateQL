@@ -1,5 +1,5 @@
 import React from 'react';
-import { bool, node } from 'prop-types';
+import { bool, func } from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 function AuthRoute({ isAuthenticated, component: Component, ...routeProps }) {
@@ -14,7 +14,7 @@ function AuthRoute({ isAuthenticated, component: Component, ...routeProps }) {
 
 AuthRoute.propTypes = {
   isAuthenticated: bool.isRequired,
-  component: node.isRequired,
+  component: func.isRequired,
 };
 
 export default AuthRoute;

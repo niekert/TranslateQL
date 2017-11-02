@@ -54,3 +54,13 @@ export const Submit = Button.extend`
     transform: scale(1.1);
   }
 `;
+
+export const Radio = styled.input.attrs({
+  type: 'radio',
+})``;
+
+export const RadioLabel = styled.label`
+  display: block;
+  margin: ${prop('theme.spacing.0')} 0;
+  font-size: 12px;
+`;

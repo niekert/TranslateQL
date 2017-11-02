@@ -8,17 +8,17 @@ const localStorageSlicer = () => state => ({
   data: state.data,
 });
 
-export default function createReduxStore(apolloClient) {
+export default function createReduxStore() {
   const composeEnhancers =
     (isDev && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose; // eslint-disable-line
 
   const enhancer = composeEnhancers(
-    applyMiddleware(thunkMiddleware, apolloClient.middleware()),
+    applyMiddleware(thunkMiddleware),
     persistState('', {
       slicer: localStorageSlicer,
     }),
   );
 
-  const reducers = createReducers(apolloClient);
+  const reducers = createReducers();
   return createStore(reducers, {}, enhancer);
 }

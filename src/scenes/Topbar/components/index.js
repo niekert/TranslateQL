@@ -101,13 +101,6 @@ class Topbar extends Component {
               </span>
             </Logo>
             <NavigationRow>
-              <NavigationItem exact to="/posts/bla">
-                Hot posts
-              </NavigationItem>
-              <NavigationItem to="/posts/new">New posts</NavigationItem>
-              <NavigationItem to="/new">
-                <PlusIcon />
-              </NavigationItem>
               {!isLoggedIn ? (
                 <NavigationItem to="/login">Sign in</NavigationItem>
               ) : (

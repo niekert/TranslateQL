@@ -1,4 +1,5 @@
-import { graphql, gql } from 'react-apollo';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { saveUserLogin } from 'data/auth/actions';

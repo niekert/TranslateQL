@@ -1,7 +1,7 @@
-# project: cj7je9lu000kw0195jyji5cps
-# version: 10
+# project: cj9ianypo0yum0124ilcym3rz
+# version: 4
 
-type File implements Node {
+type File @model {
   contentType: String!
   createdAt: DateTime!
   id: ID! @isUnique
@@ -12,47 +12,36 @@ type File implements Node {
   url: String! @isUnique
 }
 
-type User implements Node {
+type User @model {
   createdAt: DateTime!
   updatedAt: DateTime!
   id: ID! @isUnique
   username: String! @isUnique
-  posts: [Post!]! @relation(name: "UserPosts")
-  votes: [Vote!]! @relation(name: "UserVotes")
   email: String @isUnique
+  applications: [Application!]! @relation(name: "UserApplications")
   password: String
 }
 
-type Vote implements Node {
+type Application @model {
   id: ID! @isUnique
-  score: Int!
-  post: Post @relation(name: "PostVotes")
-  postedBy: User @relation(name: "UserVotes")
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  name: String!
+  baseLanguage: Language! @relation(name: "ApplicationLanguage")
+  user: User! @relation(name: "UserApplications")
+  translations: [Translation!]! @relation(name: "AppTranslations")
 }
 
-type Post implements Node {
-  createdAt: DateTime!
+type Language @model {
   id: ID! @isUnique
-  user: User! @relation(name: "UserPosts")
-  title: String!
-  description: String
-  photos: [Photo!]! @relation(name: "PostPhotos")
-  votes: [Vote!]! @relation(name: "PostVotes")
-  updatedAt: DateTime!
+  translations: [Translation!]! @relation(name: "TranslationLanguage")
+  applications: [Application!]! @relation(name: "ApplicationLanguage")
+  code: String!
+  name: String!
 }
 
-type Photo implements Node {
-  createdAt: DateTime!
+type Translation @model {
   id: ID! @isUnique
-  url: String!
-  post: Post @relation(name: "PostPhotos")
-  updatedAt: DateTime!
-}
-
-type Category implements Node {
-  id: ID! @isUnique
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  application: Application! @relation(name: "AppTranslations")
+  language: Language! @relation(name: "TranslationLanguage")
+  key: String!
+  value: String
 }
