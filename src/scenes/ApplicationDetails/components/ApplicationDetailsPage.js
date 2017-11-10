@@ -19,6 +19,7 @@ const StyledRows = Rows.extend`
 `;
 
 function ApplicationDetailsPage({ match, name, baseLanguage, isLoading }) {
+  console.log('params', match.params.applicationId);
   return (
     <NormalPage>
       {isLoading ? (
@@ -32,7 +33,7 @@ function ApplicationDetailsPage({ match, name, baseLanguage, isLoading }) {
           <span>Base language {baseLanguage.name}</span>
         </div>
       )}
-      <Route path={`${match.url}/languages`} component={AddLanguagesDialog} />
+      <Route path={`${match.path}/languages`} component={AddLanguagesDialog} />
     </NormalPage>
   );
 }

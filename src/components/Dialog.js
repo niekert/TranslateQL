@@ -74,7 +74,7 @@ class Dialog extends Component {
   }
 
   componentWillUnmount() {
-    document.addEventListener('keydown', this.onKeyDown);
+    document.removeEventListener('keydown', this.onKeyDown);
   }
 
   onKeyDown = e => {
