@@ -53,6 +53,11 @@ export const Submit = Button.extend`
     box-shadow: ${prop('theme.shadows.2')};
     transform: scale(1.1);
   }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;
 
 export const Radio = styled.input.attrs({

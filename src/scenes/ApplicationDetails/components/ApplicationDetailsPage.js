@@ -6,12 +6,12 @@ import { Link, Route } from 'react-router-dom';
 import { CtaButton } from 'style/Buttons';
 import Loading from 'components/Loading';
 import { NormalPage } from 'style/Wrappers';
-import { prop } from 'styled-tools';
 import ChangeLanguagesDialog from '../scenes/ChangeLanguagesDialog';
+import ImportTranslationsDialog from '../scenes/ImportTranslationsDialog';
 
 const CtaLink = CtaButton.extend`
-  margin-left: ${prop('theme.spacing.1')};
   font-size: 12px;
+  display: inline-block;
 `.withComponent(Link);
 
 const StyledRows = Rows.extend`
@@ -30,11 +30,17 @@ function ApplicationDetailsPage({ match, name, languages, isLoading }) {
             <CtaLink to={`${match.url}/languages`}>Add languages</CtaLink>
           </StyledRows>
           <span>{languages.map(language => language.name).join(', ')}</span>
+          <div>Placeholder</div>
+          <CtaLink to={`${match.url}/import`}>Import...</CtaLink>
         </div>
       )}
       <Route
         path={`${match.path}/languages`}
         component={ChangeLanguagesDialog}
+      />
+      <Route
+        path={`${match.path}/import`}
+        component={ImportTranslationsDialog}
       />
     </NormalPage>
   );

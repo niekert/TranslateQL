@@ -1,14 +1,20 @@
 import React from 'react';
-import { arrayOf, shape, string, func } from 'prop-types';
-import { RadioLabel, Checkbox } from 'style/Forms';
+import { arrayOf, shape, string, func, oneOfType, bool } from 'prop-types';
+import { RadioLabel, Radio, Checkbox } from 'style/Forms';
 
-function LanguagePicker({ languages, onChange, selectedLanguageIds }) {
+function LanguagePicker({ languages, onChange, selectedLanguageIds, isRadio }) {
+  const selectedIds = Array.isArray(selectedLanguageIds)
+    ? new Set(selectedLanguageIds)
+    : new Set([selectedLanguageIds]);
+
+  const SelectComponent = isRadio ? Radio : Checkbox;
+
   return (
     <div>
       {languages.map(language => (
         <RadioLabel key={`language-${language.id}`}>
-          <Checkbox
-            checked={selectedLanguageIds.includes(language.id)}
+          <SelectComponent
+            checked={selectedIds.has(language.id)}
             value={language.id}
             onChange={onChange}
           />
@@ -27,13 +33,15 @@ LanguagePicker.propTypes = {
       id: string.isRequired,
     }).isRequired,
   ),
-  selectedLanguageIds: arrayOf(string),
+  isRadio: bool,
+  selectedLanguageIds: oneOfType(string, arrayOf(string)),
   onChange: func.isRequired,
 };
 
 LanguagePicker.defaultProps = {
   languages: [],
   selectedLanguageIds: [],
+  isRadio: true,
   isSelectMultiple: false,
 };
 

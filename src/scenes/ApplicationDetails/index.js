@@ -1,6 +1,6 @@
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { compose, mapProps } from 'recompose';
+import { compose } from 'recompose';
 import ApplicationDetailsPage from './components/ApplicationDetailsPage';
 
 const APPLICATION_QUERY = gql`
@@ -22,7 +22,7 @@ const enhance = compose(
       variables: { applicationId: match.params.applicationId },
     }),
     props({ ownProps, data }) {
-      const { id, name, languages } = data.Application || {};
+      const { id, name, languages = [] } = data.Application || {};
       return {
         applicationId: id,
         isLoading: data.loading,

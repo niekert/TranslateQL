@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { func, string } from 'prop-types';
+import { func } from 'prop-types';
 import { DialogHeader } from 'style/Headings';
 import styled from 'styled-components';
 import history from 'util/history';
 import { prop } from 'styled-tools';
-import { Form, Input, Label, Submit, ErrorLabel } from 'style/Forms';
+import { Form, Input, Label, Submit } from 'style/Forms';
 import Dialog from 'components/Dialog';
 import LanguagePicker from 'scenes/LanguagePicker';
 

@@ -3,7 +3,6 @@ import { bool, string } from 'prop-types';
 import styled from 'styled-components';
 import StyledLink from 'components/Link';
 import Popover from 'components/Popover';
-import PlusIcon from 'components/icons/Plus';
 import Headroom from 'react-headroom';
 import NavLink from 'components/NavLink';
 import { prop, ifProp } from 'styled-tools';
