@@ -20,7 +20,7 @@ class CreateApplicationDialog extends Component {
   state = {
     name: '',
     error: '',
-    selectedBaseLanguageId: '',
+    selectedLanguageIds: new Set(),
   };
 
   onNameChange = e => {
@@ -28,32 +28,38 @@ class CreateApplicationDialog extends Component {
   };
 
   onLanguageChange = e => {
+    const languageIds = this.state.selectedLanguageIds;
+    if (e.target.checked) {
+      languageIds.add(e.target.value);
+    } else {
+      languageIds.delete(e.target.value);
+    }
+
     this.setState({
-      selectedBaseLanguageId: e.target.value,
+      selectedLanguageIds: languageIds,
     });
   };
 
   onSubmit = async e => {
     e.preventDefault();
-    const { name, selectedBaseLanguageId } = this.state;
+    const { name, selectedLanguageIds } = this.state;
 
     this.setState({ error: null });
 
     try {
       await this.props.submit({
         name,
-        baseLanguageId: selectedBaseLanguageId,
+        selectedLanguageIds: Array.from(selectedLanguageIds),
       });
 
       history.replace('/');
     } catch (error) {
-      console.log('something went wrong', error);
       this.setState({ error });
     }
   };
 
   render() {
-    const { name, selectedBaseLanguageId } = this.state;
+    const { name, selectedLanguageIds } = this.state;
     return (
       <Dialog returnUrl="/">
         <DialogHeader>Create an app</DialogHeader>
@@ -68,7 +74,7 @@ class CreateApplicationDialog extends Component {
           />
           <Label>Base language</Label>
           <LanguagePicker
-            selected={selectedBaseLanguageId}
+            selectedLanguageIds={Array.from(selectedLanguageIds)}
             onChange={this.onLanguageChange}
           />
 

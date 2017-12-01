@@ -8,9 +8,8 @@ const APPLICATION_QUERY = gql`
     Application(id: $applicationId) {
       id
       name
-      baseLanguage {
+      languages {
         id
-        code
         name
       }
     }
@@ -23,12 +22,12 @@ const enhance = compose(
       variables: { applicationId: match.params.applicationId },
     }),
     props({ ownProps, data }) {
-      const { id, name, baseLanguage } = data.Application || {};
+      const { id, name, languages } = data.Application || {};
       return {
         applicationId: id,
         isLoading: data.loading,
         name,
-        baseLanguage,
+        languages,
         ...ownProps,
       };
     },

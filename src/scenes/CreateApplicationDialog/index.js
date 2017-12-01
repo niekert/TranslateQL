@@ -8,13 +8,9 @@ const CREATE_APPLICATION_MUTATION = gql`
   mutation createApplicationMutation(
     $name: String!
     $userId: ID!
-    $baseLanguageId: ID!
+    $languages: [ID!]!
   ) {
-    createApplication(
-      name: $name
-      userId: $userId
-      baseLanguageId: $baseLanguageId
-    ) {
+    createApplication(name: $name, userId: $userId, languagesIds: $languages) {
       id
       name
     }
@@ -32,12 +28,12 @@ const update = (store, { data: { createApplication } }) => {
 const mutation = graphql(CREATE_APPLICATION_MUTATION, {
   props({ ownProps, mutate }) {
     return {
-      submit({ name, baseLanguageId }) {
+      submit({ name, selectedLanguageIds }) {
         return mutate({
           variables: {
             userId: ownProps.userId,
             name,
-            baseLanguageId,
+            languages: selectedLanguageIds,
           },
           update,
         });

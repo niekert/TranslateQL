@@ -61,7 +61,7 @@ export const Radio = styled.input.attrs({
 
 export const Checkbox = styled.input.attrs({
   type: 'checkbox',
-});
+})``;
 
 export const RadioLabel = styled.label`
   display: block;

@@ -1,5 +1,5 @@
 # project: cj9ianypo0yum0124ilcym3rz
-# version: 5
+# version: 9
 
 type File @model {
   contentType: String!
@@ -25,7 +25,6 @@ type User @model {
 type Application @model {
   id: ID! @isUnique
   name: String!
-  baseLanguage: Language! @relation(name: "ApplicationLanguage")
   languages: [Language!]! @relation(name: "ApplicationLanguages")
   user: User! @relation(name: "UserApplications")
   translations: [Translation!]! @relation(name: "AppTranslations")
@@ -33,17 +32,21 @@ type Application @model {
 
 type Language @model {
   id: ID! @isUnique
-  translations: [Translation!]! @relation(name: "TranslationLanguage")
-  applications: [Application!]! @relation(name: "ApplicationLanguage")
-  applicationsAsSecondaryLanguage: [Application!]! @relation(name: "ApplicationLanguages")
   code: String!
   name: String!
+  translations: [Translation!]! @relation(name: "TranslationLanguage")
+  applications: [Application!]! @relation(name: "ApplicationLanguages")
 }
 
 type Translation @model {
   id: ID! @isUnique
   application: Application! @relation(name: "AppTranslations")
+  values: [TranslationValue!]! @relation(name: "TranslationValues")
   language: Language! @relation(name: "TranslationLanguage")
-  key: String!
-  value: String
+}
+
+type TranslationValue @model {
+  id: ID! @isUnique
+  translation: Translation! @relation(name: "TranslationValues")
+  value: String!
 }
