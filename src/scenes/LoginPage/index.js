@@ -6,40 +6,25 @@ import { saveUserLogin } from 'data/auth/actions';
 import LoginPage from './components/LoginPage';
 
 const CREATE_USER_MUTATION = gql`
-  mutation createUserMutation(
-    $username: String!
-    $email: String!
-    $password: String!
-  ) {
-    createUser(
-      username: $username
-      authProvider: { email: { email: $email, password: $password } }
-    ) {
+  mutation createUserMutation($email: String!, $password: String!) {
+    signupUser(email: $email, password: $password) {
       id
-    }
-    signinUser(email: { email: $email, password: $password }) {
       token
-      user {
-        id
-      }
     }
   }
 `;
 
 const LOGIN_USER_MUTATUION = gql`
-  mutation SigninUserMutation($email: String!, $password: String!) {
-    signinUser(email: { email: $email, password: $password }) {
+  mutation authenticateUser($email: String!, $password: String!) {
+    authenticateUser(email: $email, password: $password) {
       token
-      user {
-        id
-      }
     }
   }
 `;
 
 function mapStateToProps(state) {
   return {
-    isLoggedIn: !!state.data.auth.userId,
+    isLoggedIn: !!state.data.auth.token,
   };
 }
 

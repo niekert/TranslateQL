@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { bool, string } from 'prop-types';
+import { bool, string, func } from 'prop-types';
 import styled from 'styled-components';
 import StyledLink from 'components/Link';
 import Popover from 'components/Popover';
@@ -66,14 +66,23 @@ class Topbar extends Component {
   static propTypes = {
     isLoggedIn: bool.isRequired,
     username: string,
+    loading: bool,
+    logout: func.isRequired,
   };
 
-  static defaultProps = { username: '' };
+  static defaultProps = { username: '', loading: false };
 
   state = {
     isPinned: false,
     isFixed: false,
   };
+
+  componentWillReceiveProps(nextProps) {
+    // When the query has failed, we logout in redux store
+    if (this.props.loading && !nextProps.loading && !nextProps.username) {
+      this.props.logout();
+    }
+  }
 
   onPin = () => {
     this.setState({ isPinned: true });

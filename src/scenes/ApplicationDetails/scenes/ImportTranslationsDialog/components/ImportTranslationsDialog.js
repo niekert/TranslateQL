@@ -44,7 +44,6 @@ class ImportTranslationsDialog extends React.Component {
   };
 
   onFileChange = e => {
-    // TODO: prevent multiple files
     const file = e.target.files[0];
     if (file) {
       this.fileReader.readAsText(file);
@@ -53,8 +52,6 @@ class ImportTranslationsDialog extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-
-    console.log('submitting form');
   };
 
   render() {

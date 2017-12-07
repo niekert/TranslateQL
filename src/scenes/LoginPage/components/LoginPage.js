@@ -38,7 +38,6 @@ class LoginPage extends Component {
     isSignup: false,
     isLoading: false,
     error: '',
-    username: '',
     password: '',
     email: '',
   };
@@ -64,14 +63,13 @@ class LoginPage extends Component {
 
   submit = async e => {
     e.preventDefault();
-    const { isSignup, username, password, email } = this.state;
+    const { isSignup, password, email } = this.state;
 
     this.setState({ isLoading: true, error: null });
     try {
       const result = isSignup
         ? await this.props.createUserMutation({
             variables: {
-              username,
               password,
               email,
             },
@@ -83,8 +81,10 @@ class LoginPage extends Component {
             },
           });
 
-      const { token, user } = result.data.signinUser;
-      this.props.saveUserLogin({ token, id: user.id });
+      const { token } =
+        result.data.signinUser || result.data.authenticateUser || {};
+
+      this.props.saveUserLogin({ token });
     } catch ({ graphQLErrors }) {
       const [error] = graphQLErrors;
       this.setState({
@@ -95,14 +95,7 @@ class LoginPage extends Component {
   };
 
   render() {
-    const {
-      isSignup,
-      username,
-      password,
-      email,
-      error,
-      isLoading,
-    } = this.state;
+    const { isSignup, password, email, error, isLoading } = this.state;
 
     return (
       <NormalPage>
@@ -126,19 +119,6 @@ class LoginPage extends Component {
               onChange={this.onInputChange}
               required
             />
-            {isSignup && [
-              <Label htmlFor="username" key="username-label">
-                Username
-              </Label>,
-              <Input
-                key="username-input"
-                name="username"
-                id="username"
-                value={username}
-                onChange={this.onInputChange}
-                required
-              />,
-            ]}
             <SwitchButton tabIndex={-1} onClick={this.switchSignupLogin}>
               {isSignup ? 'Want to log in?' : 'Create an account?'}
             </SwitchButton>
