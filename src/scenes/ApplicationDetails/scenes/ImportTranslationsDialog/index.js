@@ -23,15 +23,17 @@ const ADD_TRANSLATION = gql`
 const enhance = compose(
   mapProps(({ match }) => ({
     applicationId: match.params.applicationId,
+    url: match.url,
   })),
   graphql(ADD_TRANSLATION, {
     props({ ownProps, mutate }) {
-      console.log('app id', ownProps.applicationId);
       return {
-        importFile({ json }) {
+        importFile({ fileContents, selectedLanguageId }) {
           return mutate({
             variables: {
               applicationId: ownProps.applicationId,
+              fileContents,
+              selectedLanguageId,
             },
           });
         },
@@ -40,4 +42,4 @@ const enhance = compose(
   }),
 );
 
-export default ImportTranslationsDialog;
+export default enhance(ImportTranslationsDialog);

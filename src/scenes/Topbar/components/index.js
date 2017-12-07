@@ -64,13 +64,13 @@ const NavigationItem = styled(NavLink)`
 
 class Topbar extends Component {
   static propTypes = {
-    isLoggedIn: bool.isRequired,
-    username: string,
-    loading: bool,
+    email: string,
+    userId: string,
+    userLoading: bool,
     logout: func.isRequired,
   };
 
-  static defaultProps = { username: '', loading: false };
+  static defaultProps = { email: '', userLoading: false, userId: '' };
 
   state = {
     isPinned: false,
@@ -79,7 +79,7 @@ class Topbar extends Component {
 
   componentWillReceiveProps(nextProps) {
     // When the query has failed, we logout in redux store
-    if (this.props.loading && !nextProps.loading && !nextProps.username) {
+    if (this.props.userLoading && !nextProps.userLoading && !nextProps.email) {
       this.props.logout();
     }
   }
@@ -93,7 +93,8 @@ class Topbar extends Component {
   };
 
   render() {
-    const { isLoggedIn, username } = this.props;
+    const { userLoading, userId, email } = this.props;
+    const isLoggedIn = !userLoading && userId;
 
     return (
       <StyledHeadroom
@@ -115,7 +116,7 @@ class Topbar extends Component {
                 <Popover
                   triggerOnHover
                   triggerButton={
-                    <NavigationItem to="/me">{username}</NavigationItem>
+                    <NavigationItem to="/me">{email}</NavigationItem>
                   }
                 >
                   <ProfileDropdown />

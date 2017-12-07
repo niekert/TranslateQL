@@ -12,13 +12,17 @@ const FileInput = styled(Input).attrs({
 })``;
 
 class ImportTranslationsDialog extends React.Component {
+  static propTypes = {
+    url: string.isRequired,
+  };
+
   constructor(props) {
     super(props);
 
     this.fileReader = new FileReader();
     this.fileReader.onload = this.onFileRead;
 
-    this.uploadedJson = null;
+    this.fileContents = null;
   }
 
   state = {
@@ -35,12 +39,8 @@ class ImportTranslationsDialog extends React.Component {
 
   onFileRead = e => {
     const valueString = e.target.result;
-    try {
-      this.uploadedJson = JSON.parse(valueString);
-      this.setState({ isFileValid: true });
-    } catch (error) {
-      this.setState({ error: new Error('Invalid file uploaded') });
-    }
+    this.fileContents = valueString;
+    this.setState({ isFileValid: true });
   };
 
   onFileChange = e => {
@@ -55,12 +55,12 @@ class ImportTranslationsDialog extends React.Component {
   };
 
   render() {
-    const { match } = this.props;
+    const { url } = this.props;
     const { selectedLanguageId } = this.state;
     const isSubmitDisabled = !this.state.isFileValid || !selectedLanguageId;
 
     return (
-      <Dialog returnUrl={replaceLastPath(match.url, '')}>
+      <Dialog returnUrl={replaceLastPath(url, '')}>
         <DialogHeader>Import translations</DialogHeader>
         <Form onSubmit={this.onSubmit}>
           <Label>File</Label>

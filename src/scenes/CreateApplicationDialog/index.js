@@ -1,6 +1,6 @@
 import { graphql, compose } from 'react-apollo';
 import UserApplicationsQuery from 'queries/UserApplicationsQuery';
-import withUserId from 'hocs/withUserId';
+import withCurrentUser from 'hocs/withCurrentUser';
 import gql from 'graphql-tag';
 import CreateApplicationDialog from './components/CreateApplicationDialog';
 
@@ -42,6 +42,6 @@ const mutation = graphql(CREATE_APPLICATION_MUTATION, {
   },
 });
 
-const enhance = compose(withUserId, mutation);
+const enhance = compose(withCurrentUser, mutation);
 
 export default enhance(CreateApplicationDialog);
