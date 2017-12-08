@@ -72,7 +72,7 @@ class CreateApplicationDialog extends Component {
             value={name}
             onChange={this.onNameChange}
           />
-          <Label>Base language</Label>
+          <Label>Languages</Label>
           <LanguagePicker
             selectedLanguageIds={Array.from(selectedLanguageIds)}
             onChange={this.onLanguageChange}

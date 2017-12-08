@@ -1,5 +1,5 @@
 import React from 'react';
-import { shape, string } from 'prop-types';
+import { func, string } from 'prop-types';
 import styled from 'styled-components';
 import Dialog from 'components/Dialog';
 import LanguagePicker from 'scenes/LanguagePicker';
@@ -14,6 +14,7 @@ const FileInput = styled(Input).attrs({
 class ImportTranslationsDialog extends React.Component {
   static propTypes = {
     url: string.isRequired,
+    importFile: func.isRequired,
   };
 
   constructor(props) {
@@ -50,8 +51,19 @@ class ImportTranslationsDialog extends React.Component {
     }
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
+
+    try {
+      const result = await this.props.importFile(
+        this.fileContents,
+        this.state.selectedLanguageId,
+      );
+      console.log('result', result);
+    } catch (error) {
+      console.log('error', error);
+      throw error;
+    }
   };
 
   render() {
@@ -68,6 +80,7 @@ class ImportTranslationsDialog extends React.Component {
           <Label>Language</Label>
           <LanguagePicker
             onChange={this.onLanguageChange}
+            isRadio
             selectedLanguageIds={selectedLanguageId}
           />
           <Submit disabled={isSubmitDisabled}>Submit</Submit>
@@ -76,11 +89,5 @@ class ImportTranslationsDialog extends React.Component {
     );
   }
 }
-
-ImportTranslationsDialog.propTypes = {
-  match: shape({
-    url: string.isRequired,
-  }).isRequired,
-};
 
 export default ImportTranslationsDialog;

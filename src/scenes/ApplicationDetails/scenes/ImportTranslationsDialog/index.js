@@ -3,19 +3,18 @@ import { compose, mapProps } from 'recompose';
 import gql from 'graphql-tag';
 import ImportTranslationsDialog from './components/ImportTranslationsDialog';
 
-const ADD_TRANSLATION = gql`
-  mutation addTranslation(
-    $key: String!
+const IMPORT_TRANSLATIONS = gql`
+  mutation importTranslations(
     $applicationId: ID!
+    $fileContents: String!
     $languageId: ID!
-    $value: String!
   ) {
-    createTranslation(
+    importTranslations(
       applicationId: $applicationId
-      key: $key
-      values: [{ languageId: $languageId, value: $value }]
+      fileContents: $fileContents
+      languageId: $languageId
     ) {
-      id
+      translations
     }
   }
 `;
@@ -25,15 +24,16 @@ const enhance = compose(
     applicationId: match.params.applicationId,
     url: match.url,
   })),
-  graphql(ADD_TRANSLATION, {
+  graphql(IMPORT_TRANSLATIONS, {
     props({ ownProps, mutate }) {
       return {
-        importFile({ fileContents, selectedLanguageId }) {
+        importFile(fileContents, languageId) {
+          console.log('file', fileContents, languageId);
           return mutate({
             variables: {
               applicationId: ownProps.applicationId,
+              languageId,
               fileContents,
-              selectedLanguageId,
             },
           });
         },

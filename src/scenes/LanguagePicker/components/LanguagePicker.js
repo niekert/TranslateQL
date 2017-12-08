@@ -41,7 +41,7 @@ LanguagePicker.propTypes = {
 LanguagePicker.defaultProps = {
   languages: [],
   selectedLanguageIds: [],
-  isRadio: true,
+  isRadio: false,
   isSelectMultiple: false,
 };
 
