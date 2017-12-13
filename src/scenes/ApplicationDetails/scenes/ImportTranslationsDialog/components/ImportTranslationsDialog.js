@@ -2,6 +2,7 @@ import React from 'react';
 import { func, string } from 'prop-types';
 import styled from 'styled-components';
 import Dialog from 'components/Dialog';
+import history from 'util/history';
 import LanguagePicker from 'scenes/LanguagePicker';
 import { Form, Submit, Input, Label } from 'style/Forms';
 import { DialogHeader } from 'style/Headings';
@@ -59,9 +60,15 @@ class ImportTranslationsDialog extends React.Component {
         this.fileContents,
         this.state.selectedLanguageId,
       );
-      console.log('result', result);
+
+      const { translations, errors } = result.data.importTranslations;
+
+      // eslint-disable-next-line
+      console.log(`import for ${translations.length} completed. Import container ${errors.length} errors: \n
+        ${errors.join('\n\n')}
+      `);
+      history.push(replaceLastPath(this.props.url));
     } catch (error) {
-      console.log('error', error);
       throw error;
     }
   };

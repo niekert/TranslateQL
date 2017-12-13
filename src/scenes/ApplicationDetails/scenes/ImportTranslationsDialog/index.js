@@ -15,6 +15,7 @@ const IMPORT_TRANSLATIONS = gql`
       languageId: $languageId
     ) {
       translations
+      errors
     }
   }
 `;
@@ -28,7 +29,6 @@ const enhance = compose(
     props({ ownProps, mutate }) {
       return {
         importFile(fileContents, languageId) {
-          console.log('file', fileContents, languageId);
           return mutate({
             variables: {
               applicationId: ownProps.applicationId,

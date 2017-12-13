@@ -4,6 +4,7 @@ import { H1 } from 'style/Headings';
 import { Rows } from 'style/flex';
 import { Link, Route } from 'react-router-dom';
 import { CtaButton } from 'style/Buttons';
+import TranslationsView from 'scenes/TranslationsView';
 import Loading from 'components/Loading';
 import { NormalPage } from 'style/Wrappers';
 import ChangeLanguagesDialog from '../scenes/ChangeLanguagesDialog';
@@ -30,7 +31,7 @@ function ApplicationDetailsPage({ match, name, languages, isLoading }) {
             <CtaLink to={`${match.url}/languages`}>Add languages</CtaLink>
           </StyledRows>
           <span>{languages.map(language => language.name).join(', ')}</span>
-          <div>Placeholder</div>
+          <TranslationsView />
           <CtaLink to={`${match.url}/import`}>Import...</CtaLink>
         </div>
       )}

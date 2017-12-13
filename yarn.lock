@@ -2,6 +2,12 @@
 # yarn lockfile v1
 
 
+"@hocs/throttle-handler@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@hocs/throttle-handler/-/throttle-handler-0.3.0.tgz#a0a00ef483aa2de30552573ac917b8411d2ab929"
+  dependencies:
+    just-throttle "^1.0.2"
+
 "@types/async@2.0.44":
   version "2.0.44"
   resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.44.tgz#e846150fd1f5a3243cec7c1f5bb49f58241092ee"
@@ -4266,6 +4272,10 @@ jsx-ast-utils@^2.0.0:
   resolved "https://registry.npmjs.org/jsx-ast-utils/-/jsx-ast-utils-2.0.1.tgz#e801b1b39985e20fffc87b40e3748080e2dcac7f"
   dependencies:
     array-includes "^3.0.3"
+
+just-throttle@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/just-throttle/-/just-throttle-1.0.2.tgz#89bb6d3303771ff18c58af9446d25d12ddc9ebd5"
 
 kind-of@^3.0.2:
   version "3.2.2"
