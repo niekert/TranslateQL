@@ -34,7 +34,7 @@ LanguagePicker.propTypes = {
     }).isRequired,
   ),
   isRadio: bool,
-  selectedLanguageIds: oneOfType(string, arrayOf(string)),
+  selectedLanguageIds: oneOfType([string, arrayOf(string)]),
   onChange: func.isRequired,
 };
 
