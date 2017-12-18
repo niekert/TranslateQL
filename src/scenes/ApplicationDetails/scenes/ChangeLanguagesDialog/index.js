@@ -1,6 +1,7 @@
 import { graphql, compose } from 'react-apollo';
 import { get } from 'lodash';
 import gql from 'graphql-tag';
+import { APPLICATION_QUERY } from '../../index';
 import ChangeLanguagesDialog from './components/ChangeLanguagesDialog';
 
 const SELECTED_LANGUAGES_QUERY = gql`
@@ -48,6 +49,9 @@ const enhance = compose(
               applicationId,
               selectedLanguageIds,
             },
+            refetchQueries: [
+              { query: APPLICATION_QUERY, variables: { applicationId } },
+            ],
           });
         },
       };

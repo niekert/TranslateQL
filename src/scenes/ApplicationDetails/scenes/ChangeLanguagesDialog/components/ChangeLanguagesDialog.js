@@ -1,6 +1,7 @@
 import React from 'react';
 import { arrayOf, string, func } from 'prop-types';
 import LanguagePicker from 'scenes/LanguagePicker';
+import history from 'util/history';
 import { matchProp } from 'customPropTypes';
 import { DialogHeader } from 'style/Headings';
 import { Form, Submit } from 'style/Forms';
@@ -37,6 +38,7 @@ class AddLanguagesDialog extends React.Component {
     this.props.submit({
       selectedLanguageIds: Array.from(this.state.selectedLanguageIds),
     });
+    history.push(replaceLastPath(this.props.match.url, ''));
   };
 
   render() {

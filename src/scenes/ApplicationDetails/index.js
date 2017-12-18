@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { compose } from 'recompose';
 import ApplicationDetailsPage from './components/ApplicationDetailsPage';
 
-const APPLICATION_QUERY = gql`
+export const APPLICATION_QUERY = gql`
   query ApplicationDetails($applicationId: ID!) {
     Application(id: $applicationId) {
       id

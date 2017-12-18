@@ -1,7 +1,7 @@
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-const USER_QUERY = gql`
+export const USER_QUERY = gql`
   query AuthUser {
     loggedInUser {
       id

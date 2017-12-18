@@ -3,6 +3,7 @@ import { arrayOf, bool, shape, string, func } from 'prop-types';
 import gql from 'graphql-tag';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
+import { prop } from 'styled-tools';
 import { NormalTile } from 'style/Tiles';
 import MutateTranslation from '../scenes/MutateTranslation';
 import Filter from './Filter';
@@ -11,19 +12,33 @@ const Wrapper = styled.div`
   margin-top: 2em;
 `;
 
+const TranslationsGrid = styled.div`
+  display: grid;
+  grid-template: repeat(auto-fit, 25px) / repeat(${prop('columnLength')}, 1fr);
+`;
+
+const Label = styled.label`
+  font-weight: 600;
+`;
+
 function TranslationsView({ setFilter, translations, isLoading, languages }) {
   return (
     <Wrapper>
       <Filter setFilter={setFilter} />
       <NormalTile>
-        Wow translations
-        {translations.map(translation => (
-          <MutateTranslation
-            languages={languages}
-            translation={translation}
-            key={translation.id}
-          />
-        ))}
+        <TranslationsGrid columnLength={languages.length + 1}>
+          <Label>Key</Label>
+          {languages.map(language => (
+            <Label key={language.id}>{language.code}</Label>
+          ))}
+          {translations.map(translation => (
+            <MutateTranslation
+              languages={languages}
+              translation={translation}
+              key={translation.id}
+            />
+          ))}
+        </TranslationsGrid>
       </NormalTile>
     </Wrapper>
   );
