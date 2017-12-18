@@ -2,7 +2,6 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import { USER_QUERY } from 'hocs/withCurrentUser';
 import { saveUserLogin } from 'data/auth/actions';
 import LoginPage from './components/LoginPage';
 
@@ -29,21 +28,13 @@ function mapStateToProps(state) {
   };
 }
 
-const refetchQueries = [
-  {
-    query: USER_QUERY,
-  },
-];
-
 const enhance = compose(
   connect(mapStateToProps, { saveUserLogin }),
   graphql(CREATE_USER_MUTATION, {
     name: 'createUserMutation',
-    options: { refetchQueries },
   }),
   graphql(LOGIN_USER_MUTATUION, {
     name: 'loginUserMutation',
-    options: { refetchQueries },
   }),
 );
 
