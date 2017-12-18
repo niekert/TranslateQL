@@ -24,7 +24,7 @@ const QUERY_TRANSLATIONS = gql`
   ${TranslationsView.fragments.translation}
 `;
 
-const mapStateToProps = ({ translationsView }, ownProps) => ({
+const mapStateToProps = (state, ownProps) => ({
   applicationId: ownProps.match.params.applicationId,
 });
 

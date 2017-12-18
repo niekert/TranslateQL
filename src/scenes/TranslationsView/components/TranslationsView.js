@@ -1,5 +1,5 @@
 import React from 'react';
-import { arrayOf, bool, shape, string, func } from 'prop-types';
+import { arrayOf, shape, string, func } from 'prop-types';
 import gql from 'graphql-tag';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
@@ -21,7 +21,7 @@ const Label = styled.label`
   font-weight: 600;
 `;
 
-function TranslationsView({ setFilter, translations, isLoading, languages }) {
+function TranslationsView({ setFilter, translations, languages }) {
   return (
     <Wrapper>
       <Filter setFilter={setFilter} />
@@ -38,6 +38,7 @@ function TranslationsView({ setFilter, translations, isLoading, languages }) {
               key={translation.id}
             />
           ))}
+          <MutateTranslation languages={languages} />
         </TranslationsGrid>
       </NormalTile>
     </Wrapper>
@@ -70,7 +71,6 @@ TranslationsView.propTypes = {
       code: String.isRequired,
     }).isRequired,
   ).isRequired,
-  isLoading: bool.isRequired,
 };
 
 TranslationsView.defaultProps = {

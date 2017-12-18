@@ -1,18 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
 import TranslationKeyInput from './TranslationKeyInput';
 import TranslationValueInput from './TranslationValueInput';
-
-const Wrapper = styled.div`
-  display: flex;
-`;
 
 function MutateTranslation({ translation, languages }) {
   return (
     <React.Fragment>
       <TranslationKeyInput
-        translationKey={translation.key}
-        translationId={translation.id}
+        translationKey={translation && translation.key}
+        translationId={translation && translation.id}
       />
       {languages.map(language => (
         <TranslationValueInput
